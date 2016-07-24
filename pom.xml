@@ -18,7 +18,7 @@
 		<url>www.univocity.com</url>
 	</organization>
 
-	<url>http://github.com/uniVocity/univocity-examples</url>
+	<url>http://github.com/uniVocity/univocity-html-parser-examples</url>
 
 	<licenses>
 		<license>
@@ -31,13 +31,13 @@
 
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/uniVocity/univocity-examples/issues</url>
+		<url>https://github.com/uniVocity/univocity-html-parser-examples/issues</url>
 	</issueManagement>
 
 	<scm>
-		<url>https://github.com/uniVocity/univocity-examples</url>
-		<connection>scm:git:git://github.com/uniVocity/univocity-examples.git</connection>
-		<developerConnection>scm:git:git@github.com:uniVocity/univocity-examples.git</developerConnection>
+		<url>https://github.com/uniVocity/univocity-html-parser-examples</url>
+		<connection>scm:git:git://github.com/uniVocity/univocity-html-parser-examples.git</connection>
+		<developerConnection>scm:git:git@github.com:uniVocity/univocity-html-parser-examples.git</developerConnection>
 	</scm>
 
 	<developers>
@@ -200,9 +200,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<univocity-common-examples.version>2.0.0-SNAPSHOT</univocity-common-examples.version>
-		<univocity-parsers.version>2.2.0-SNAPSHOT</univocity-parsers.version>
-		<testng.version>6.8.21</testng.version>
 	</properties>
 
 	<dependencies>
@@ -226,7 +223,7 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>${testng.version}</version>
+			<version>6.8.21</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
