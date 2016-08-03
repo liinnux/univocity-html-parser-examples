@@ -107,9 +107,7 @@ public class HtmlParserExamples extends Example {
 		};
 
 		// converts values in the "price" column (index 3) to Double, after removing dollar sign and any letters
-		rowProcessor.convertIndexes(Conversions.replace("\\$", "")).set(3);
-		rowProcessor.convertIndexes(Conversions.replace("/.*", "")).set(3);
-		rowProcessor.convertIndexes(Conversions.toDouble()).set(3);
+		rowProcessor.convertIndexes(Conversions.replace("\\$", ""), Conversions.replace("/.*", ""), Conversions.toDouble()).set(3);
 
 		// converts the values in columns "name" to lower case.
 		rowProcessor.convertFields(Conversions.toLowerCase()).set("name");
@@ -290,8 +288,6 @@ public class HtmlParserExamples extends Example {
 
 	protected HtmlEntityList configure() {
 		HtmlEntityList entityList = new HtmlEntityList();
-
-		UrlReaderProvider provider = getInput();
 
 		HtmlEntity items = entityList.configureEntity("items");
 		PartialHtmlPath path = items.newPath().match("table").id("productsTable").match("td").match("div").classes("productContainer");
