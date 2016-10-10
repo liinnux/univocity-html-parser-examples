@@ -42,9 +42,8 @@ public class HtmlParserExamples extends Example {
 		//##CODE_START
 		HtmlEntityList htmlEntityList = configure();
 		HtmlParserSettings settings = new HtmlParserSettings(htmlEntityList);
-		settings.setDownloadContentDirectory("images/");
-		//settings.selectIndexes(3,1);
-		settings.setColumnReorderingEnabled(false);
+		settings.setDownloadContentDirectory("{user.home}/Downloads/pages/");
+
 		// creates a HTML parser
 		HtmlParser parser = new HtmlParser(settings);
 
