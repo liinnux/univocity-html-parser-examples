@@ -70,7 +70,9 @@ public class HtmlParserExamples extends Example {
 
 		// You can configure the parser to use a RowProcessor to process the values of each parsed row.
 		// You will find more RowProcessors in the 'com.univocity.parsers.common.processor' package, but you can also create your own.
-		settings.setEntityProcessor(rowProcessor, "items");
+
+		HtmlEntitySettings entitySettings = htmlEntityList.getEntity("items");
+		entitySettings.setProcessor(rowProcessor);
 
 		// creates a parser instance with the given settings
 		HtmlParser parser = new HtmlParser(settings);
@@ -113,7 +115,8 @@ public class HtmlParserExamples extends Example {
 		rowProcessor.convertFields(Conversions.toLowerCase()).set("name");
 
 		HtmlParserSettings parserSettings = new HtmlParserSettings(htmlEntityList);
-		parserSettings.setEntityProcessor(rowProcessor, "items");
+		htmlEntityList.configureEntity("items").setProcessor(rowProcessor);
+
 
 		HtmlParser parser = new HtmlParser(parserSettings);
 
@@ -133,7 +136,7 @@ public class HtmlParserExamples extends Example {
 		HtmlEntityList htmlEntityList = configure();
 		HtmlParserSettings parserSettings = new HtmlParserSettings(htmlEntityList);
 
-		parserSettings.setEntityProcessor(rowProcessor, "items");
+		htmlEntityList.configureEntity("items").setProcessor(rowProcessor);
 
 		HtmlParser parser = new HtmlParser(parserSettings);
 		parser.parse(getInput());
@@ -188,7 +191,7 @@ public class HtmlParserExamples extends Example {
 		HtmlParser parser = new HtmlParser(settings);
 
 		//selects which fields will be returned, and in what order
-		settings.selectFields("price", "name");
+		htmlEntityList.configureEntity("items").selectFields("price", "name");
 
 		// parses all rows in one go.
 		Map<String, List<String[]>> allRows = parser.parseAll(getInput());
@@ -206,15 +209,16 @@ public class HtmlParserExamples extends Example {
 		HtmlEntityList htmlEntityList = configure();
 		HtmlParserSettings settings = new HtmlParserSettings(htmlEntityList);
 
-		// sets a global row processor
-		settings.setGlobalProcessor(new AbstractProcessor() {
+		HtmlEntitySettings items = htmlEntityList.configureEntity("items");
+
+		items.setProcessor(new AbstractProcessor() {
 			public void rowProcessed(String[] row, ParsingContext context) {
 				super.rowProcessed(row, context);
 				System.out.println(row[0]);
 			}
 		});
-		settings.selectIndexes(3, 1);
-		settings.setColumnReorderingEnabled(false);
+		items.selectIndexes(3, 1);
+		items.setColumnReorderingEnabled(false);
 
 		// creates a HTML parser
 		HtmlParser parser = new HtmlParser(settings);
@@ -230,16 +234,15 @@ public class HtmlParserExamples extends Example {
 	}
 
 
-
 	@Test
 	public void example008Pagination() {
 		//##CODE_START
 		HtmlEntityList entityList = configure();
 
-		//Pagination allows the parser to go to the next page after parsing a page
-		entityList.configurePaginator().newGroup().startAt("div").classes("filterDropdowns").endAt("div").classes("serpSearchString").setNextPage().match("div").id("pagination").match("a").precededImmediatelyBy("a").classes("active").getAttribute("href");
-
 		HtmlParserSettings settings = new HtmlParserSettings(entityList);
+
+		//Pagination allows the parser to go to the next page after parsing a page
+		settings.configurePaginator().newGroup().startAt("div").classes("filterDropdowns").endAt("div").classes("serpSearchString").setNextPage().match("div").id("pagination").match("a").precededImmediatelyBy("a").classes("active").getAttribute("href");
 
 		//Sets where content will be downloaded to and sets a filename pattern for pages downloaded
 		settings.setDownloadContentDirectory("ikea/");
@@ -262,17 +265,17 @@ public class HtmlParserExamples extends Example {
 		HtmlEntityList entityList = new HtmlEntityList();
 		HtmlParserSettings settings = new HtmlParserSettings(entityList);
 
-		HtmlEntity items = entityList.configureEntity("items");
+		HtmlEntitySettings items = entityList.configureEntity("items");
 
 		PartialHtmlPath path = items.newPath().match("table").id("productsTable").match("td").match("div").classes("productContainer");
 
 		path.addField("name").match("span").classes("prodName", "prodNameTro").getText();
 		path.addField("price").match("span").classes("prodPrice").getText();
 
-		entityList.configurePaginator().newGroup().startAt("div").classes("filterDropdowns").endAt("div").classes("serpSearchString").setNextPage().match("div").id("pagination").match("a").precededImmediatelyBy("a").classes("active").getAttribute("href");
-		entityList.configurePaginator().setFollowCount(1);
+		settings.configurePaginator().newGroup().startAt("div").classes("filterDropdowns").endAt("div").classes("serpSearchString").setNextPage().match("div").id("pagination").match("a").precededImmediatelyBy("a").classes("active").getAttribute("href");
+		settings.configurePaginator().setFollowCount(1);
 
-		HtmlLinkFollower linkFollower = entityList.configureLinkFollower();
+		HtmlLinkFollower linkFollower = settings.configureLinkFollower();
 		linkFollower.setJoinRows(true);
 		linkFollower.addLink().match("table").id("productsTable").match("td").match("div").classes("productContainer").match("div").classes("parentContainer").match("a").getAttribute("href");
 		linkFollower.addField("fullDesc").match("div").id("salesArg").match("a").getPrecedingText();
@@ -289,7 +292,7 @@ public class HtmlParserExamples extends Example {
 	protected HtmlEntityList configure() {
 		HtmlEntityList entityList = new HtmlEntityList();
 
-		HtmlEntity items = entityList.configureEntity("items");
+		HtmlEntitySettings items = entityList.configureEntity("items");
 		PartialHtmlPath path = items.newPath().match("table").id("productsTable").match("td").match("div").classes("productContainer");
 		path.addField("name").match("span").classes("prodName", "prodNameTro").getText();
 		path.addField("URL").match("a").childOf("div").classes("productPadding").getAttribute("href");
