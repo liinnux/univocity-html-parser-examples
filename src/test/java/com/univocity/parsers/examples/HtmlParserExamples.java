@@ -23,10 +23,6 @@ import java.util.*;
  */
 public class HtmlParserExamples extends Example {
 
-	private UrlReaderProvider getInput() {
-		return new UrlReaderProvider("http://www.ikea.com/au/en/search/?query=cup");
-	}
-
 	private void printOutput(Map<String, List<String[]>> allRows) {
 		for (Map.Entry<String, List<String[]>> e : allRows.entrySet()) {
 			println("Rows in entity name: " + e.getKey());
@@ -47,10 +43,11 @@ public class HtmlParserExamples extends Example {
 		// creates a HTML parser
 		HtmlParser parser = new HtmlParser(settings);
 
-		// parses all rows in one go.
-		Map<String, List<String[]>> allRows = parser.parseAll(getInput());
-		printOutput(allRows);
+		UrlReaderProvider input = new UrlReaderProvider("http://www.ikea.com/au/en/search/?query=cup");
 
+		// parses all rows in one go.
+		Map<String, List<String[]>> allRows = parser.parseAll(input);
+		printOutput(allRows);
 
 		//##CODE_END
 		printAndValidate();
@@ -95,7 +92,7 @@ public class HtmlParserExamples extends Example {
 		HtmlParser parser = new HtmlParser(settings);
 
 		// the 'parse' method will parse the file and delegate each parsed row to the RowProcessor you defined
-		parser.parse(getInput());
+		parser.parse(new FileProvider("inputs/page1.html", "UTF-8"));
 
 		// get the parsed records from the RowListProcessor here.
 		// Note that different implementations of RowProcessor will provide different sets of functionalities.
@@ -138,7 +135,7 @@ public class HtmlParserExamples extends Example {
 		HtmlParser parser = new HtmlParser(parserSettings);
 
 		//the rowProcessor will be executed here.
-		parser.parse(getInput());
+		parser.parse(new FileProvider("inputs/page1.html", "UTF-8"));
 
 		//##CODE_END
 
@@ -156,7 +153,7 @@ public class HtmlParserExamples extends Example {
 		htmlEntityList.configureEntity("items").setProcessor(rowProcessor);
 
 		HtmlParser parser = new HtmlParser(parserSettings);
-		parser.parse(getInput());
+		parser.parse(new FileProvider("inputs/page1.html", "UTF-8"));
 
 		// The BeanListProcessor provides a list of objects extracted from the input.
 		List<Items> beans = rowProcessor.getBeans();
@@ -179,7 +176,7 @@ public class HtmlParserExamples extends Example {
 
 
 		// parses all records in one go.
-		Map<String, List<Record>> allRecords = parser.parseAllRecords(getInput());
+		Map<String, List<Record>> allRecords = parser.parseAllRecords(new FileProvider("inputs/page1.html"));
 		for (Map.Entry<String, List<Record>> record : allRecords.entrySet()) {
 			println("Entity name: " + record.getKey());
 
@@ -211,7 +208,7 @@ public class HtmlParserExamples extends Example {
 		htmlEntityList.configureEntity("items").selectFields("price", "name");
 
 		// parses all rows in one go.
-		Map<String, List<String[]>> allRows = parser.parseAll(getInput());
+		Map<String, List<String[]>> allRows = parser.parseAll(new FileProvider("inputs/page1.html", "UTF-8"));
 
 		printOutput(allRows);
 
@@ -241,7 +238,7 @@ public class HtmlParserExamples extends Example {
 		HtmlParser parser = new HtmlParser(settings);
 
 		// parses all rows in one go.
-		Map<String, List<String[]>> allRows = parser.parseAll(getInput());
+		Map<String, List<String[]>> allRows = parser.parseAll(new FileProvider("inputs/page1.html", "UTF-8"));
 
 		printOutput(allRows);
 
@@ -268,7 +265,7 @@ public class HtmlParserExamples extends Example {
 		HtmlParser parser = new HtmlParser(settings);
 
 		// parses all rows in one go.
-		Map<String, List<String[]>> allRows = parser.parseAll(getInput());
+		Map<String, List<String[]>> allRows = parser.parseAll(new FileProvider("inputs/page1.html", "UTF-8"));
 		printOutput(allRows);
 
 
@@ -300,7 +297,7 @@ public class HtmlParserExamples extends Example {
 
 		HtmlParser parser = new HtmlParser(settings);
 
-		printOutput(parser.parseAll(getInput()));
+		printOutput(parser.parseAll(new FileProvider("inputs/page1.html", "UTF-8")));
 
 		printAndValidate();
 	}
