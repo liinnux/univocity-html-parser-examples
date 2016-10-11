@@ -1,0 +1,25 @@
+Item{name='vardagen', desc='Coffee cup and saucer', price=$2.99}
+Item{name='stugvik', desc='Towel rack with suction cup', price=$14.99}
+Item{name='stugvik', desc='Basket with suction cup', price=$9.99}
+Item{name='hejsan', desc='Pen cup, set of 3', price=$4.99}
+Item{name='stugvik', desc='Hook with suction cup', price=$7.99 /2 pack}
+Item{name='gottgöra', desc='Lantern for candle in metal cup', price=$14.99}
+Item{name='stugvik', desc='Mirror with hooks and suction cup', price=$14.99}
+Item{name='dokument', desc='Pen cup', price=$4.99 /2 pack}
+Item{name='putsad', desc='Lantern for candle in metal cup', price=$7.99}
+Item{name='glimma', desc='Unscented candle in metal cup', price=$7.99 /24 pack}
+Item{name='stugvik', desc='Hook with suction cup', price=$9.99 /4 pack}
+Item{name='värdera', desc='Coffee cup and saucer', price=$2.99}
+Item{name='vardagen', desc='Bowl/egg cup', price=$1.99 /2 pack}
+Item{name='stugvik', desc='Soap dispenser with suction cup', price=$6.99}
+Item{name='värdera', desc='Espresso cup and saucer', price=$1.99}
+Item{name='vardagen', desc='Espresso cup and saucer', price=$2.99}
+Item{name='stugvik', desc='Soap dish with suction cup', price=$6.99}
+Item{name='vardagen', desc='Measuring cup, set of 5', price=$5.99}
+Item{name='värdera', desc='Egg cup', price=$2.99}
+Item{name='stugvik', desc='Toilet roll holder with suction cup', price=$4.99}
+Item{name='låddan', desc='Hook with suction cup', price=$3.99}
+Item{name='dessert', desc='Set of 4 measuring cups 1/4 - 1', price=$2.99}
+Item{name='ikea 365+', desc='Espresso cup and saucer', price=$2.99}
+Item{name='sinnlig', desc='Scented candle in metal cup', price=$4.99 /12 pack}
+Item{name='stugvik', desc='Toothbrush holder with suction cup', price=$6.99}

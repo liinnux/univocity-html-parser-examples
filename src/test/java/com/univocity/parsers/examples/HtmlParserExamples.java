@@ -9,7 +9,6 @@ package com.univocity.parsers.examples;
 import com.univocity.api.common.*;
 import com.univocity.api.entity.html.*;
 import com.univocity.api.entity.html.builders.*;
-import com.univocity.parsers.common.*;
 import com.univocity.parsers.common.processor.core.*;
 import com.univocity.parsers.common.record.*;
 import com.univocity.parsers.conversions.*;
@@ -176,7 +175,7 @@ public class HtmlParserExamples extends Example {
 
 
 		// parses all records in one go.
-		Map<String, List<Record>> allRecords = parser.parseAllRecords(new FileProvider("inputs/page1.html"));
+		Map<String, List<Record>> allRecords = parser.parseAllRecords(new FileProvider("inputs/page1.html", "UTF-8"));
 		for (Map.Entry<String, List<Record>> record : allRecords.entrySet()) {
 			println("Entity name: " + record.getKey());
 
@@ -196,7 +195,7 @@ public class HtmlParserExamples extends Example {
 	}
 
 	@Test
-	public void example006ParseAll() throws Exception {
+	public void example006ParseWithFieldSelection() throws Exception {
 		//##CODE_START
 		HtmlEntityList htmlEntityList = configure();
 		HtmlParserSettings settings = new HtmlParserSettings(htmlEntityList);
@@ -218,17 +217,16 @@ public class HtmlParserExamples extends Example {
 	}
 
 	@Test
-	public void example007GlobalRowProcessor() {
+	public void example007FieldSelectionWithoutReordering() {
 		//##CODE_START
 		HtmlEntityList htmlEntityList = configure();
 		HtmlParserSettings settings = new HtmlParserSettings(htmlEntityList);
+		settings.setNullValue("\\N");
 
 		HtmlEntitySettings items = htmlEntityList.configureEntity("items");
-
-		items.setProcessor(new AbstractProcessor() {
-			public void rowProcessed(String[] row, ParsingContext context) {
-				super.rowProcessed(row, context);
-				System.out.println(row[0]);
+		items.setProcessor(new AbstractProcessor<HtmlParsingContext>() {
+			public void rowProcessed(String[] row, HtmlParsingContext context) {
+				println(Arrays.toString(row));
 			}
 		});
 		items.selectIndexes(3, 1);
@@ -237,10 +235,7 @@ public class HtmlParserExamples extends Example {
 		// creates a HTML parser
 		HtmlParser parser = new HtmlParser(settings);
 
-		// parses all rows in one go.
-		Map<String, List<String[]>> allRows = parser.parseAll(new FileProvider("inputs/page1.html", "UTF-8"));
-
-		printOutput(allRows);
+		parser.parse(new FileProvider("inputs/page1.html", "UTF-8"));
 
 
 		//##CODE_END
