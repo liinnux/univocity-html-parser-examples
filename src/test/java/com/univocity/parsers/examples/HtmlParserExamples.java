@@ -62,7 +62,7 @@ public class HtmlParserExamples extends Example {
 		HtmlParser parser = new HtmlParser(settings);
 
 		// parses all rows in one go.
-		Map<String, List<String[]>> allRows = parser.parseAll(new FileProvider("{user.home}/Downloads/pages/page1.html"));
+		Map<String, List<String[]>> allRows = parser.parseAll(new FileProvider("{user.home}/Downloads/pages/page_1.html"));
 		printOutput(allRows);
 
 
@@ -249,18 +249,47 @@ public class HtmlParserExamples extends Example {
 		HtmlEntityList entityList = configure();
 
 		HtmlParserSettings settings = new HtmlParserSettings(entityList);
+		//Sets where content will be downloaded to and sets a filename pattern for pages downloaded
+		settings.setDownloadContentDirectory("{user.home}/Downloads/ikea/");
+		settings.setFileNamePattern("search/page_{pageNumber}");
 
 		//Pagination allows the parser to go to the next page after parsing a page
-		settings.configurePaginator().newGroup().startAt("div").classes("filterDropdowns").endAt("div").classes("serpSearchString").setNextPage().match("div").id("pagination").match("a").precededImmediatelyBy("a").classes("active").getAttribute("href");
+		HtmlPaginator paginator = settings.configurePaginator();
+		paginator.newGroup().startAt("div").classes("filterDropdowns").endAt("div").classes("serpSearchString").setNextPage().match("div").id("pagination").match("a").precededImmediatelyBy("a").classes("active").getAttribute("href");
 
-		//Sets where content will be downloaded to and sets a filename pattern for pages downloaded
-		settings.setDownloadContentDirectory("ikea/");
-		settings.setFileNamePattern("search/{pageNumber}");
 
 		HtmlParser parser = new HtmlParser(settings);
 
+		UrlReaderProvider input = new UrlReaderProvider("http://www.ikea.com/au/en/search/?query=cup");
 		// parses all rows in one go.
-		Map<String, List<String[]>> allRows = parser.parseAll(new FileProvider("inputs/page1.html", "UTF-8"));
+		Map<String, List<String[]>> allRows = parser.parseAll(input);
+		printOutput(allRows);
+
+
+		//##CODE_END
+		printAndValidate();
+
+	}
+
+	@Test
+	public void example009PaginationOnFiles() {
+		//##CODE_START
+		HtmlEntityList entityList = configure();
+
+		HtmlParserSettings settings = new HtmlParserSettings(entityList);
+		//Sets where content will be downloaded to and sets a filename pattern for pages downloaded
+		settings.setDownloadContentDirectory("{user.home}/Downloads/ikea/");
+		settings.setFileNamePattern("search/page_{pageNumber}");
+
+		//Pagination allows the parser to go to the next page after parsing a page
+		HtmlPaginator paginator = settings.configurePaginator();
+		paginator.newGroup().startAt("div").classes("filterDropdowns").endAt("div").classes("serpSearchString").setNextPage().match("div").id("pagination").match("a").precededImmediatelyBy("a").classes("active").getAttribute("href");
+
+		HtmlParser parser = new HtmlParser(settings);
+
+		FileProvider input = new FileProvider("inputs/ikea/search/page_1.html");
+		// parses all rows in one go.
+		Map<String, List<String[]>> allRows = parser.parseAll(input);
 		printOutput(allRows);
 
 
