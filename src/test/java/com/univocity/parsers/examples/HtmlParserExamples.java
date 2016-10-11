@@ -57,6 +57,24 @@ public class HtmlParserExamples extends Example {
 	}
 
 	@Test
+	public void example001ParseAllFromFile() throws Exception {
+		//##CODE_START
+		HtmlEntityList htmlEntityList = configure();
+		HtmlParserSettings settings = new HtmlParserSettings(htmlEntityList);
+
+		// creates a HTML parser
+		HtmlParser parser = new HtmlParser(settings);
+
+		// parses all rows in one go.
+		Map<String, List<String[]>> allRows = parser.parseAll(new FileProvider("{user.home}/Downloads/pages/page1.html"));
+		printOutput(allRows);
+
+
+		//##CODE_END
+		printAndValidate();
+	}
+
+	@Test
 	public void example002ReadHtmlWithRowProcessor() throws Exception {
 		//##CODE_START
 
