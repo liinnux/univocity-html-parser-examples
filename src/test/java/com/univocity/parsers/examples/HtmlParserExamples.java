@@ -268,7 +268,6 @@ public class HtmlParserExamples extends Example {
 
 		//##CODE_END
 		printAndValidate();
-
 	}
 
 	@Test
@@ -314,7 +313,6 @@ public class HtmlParserExamples extends Example {
 		settings.configurePaginator().setFollowCount(1);
 
 		HtmlLinkFollower linkFollower = settings.configureLinkFollower();
-		linkFollower.setJoinRows(true);
 		linkFollower.addLink().match("table").id("productsTable").match("td").match("div").classes("productContainer").match("div").classes("parentContainer").match("a").getAttribute("href");
 		linkFollower.addField("fullDesc").match("div").id("salesArg").match("a").getPrecedingText();
 		linkFollower.addField("goodToKnow").match("div").id("careInst").getText();
