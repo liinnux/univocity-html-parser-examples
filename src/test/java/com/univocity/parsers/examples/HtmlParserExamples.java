@@ -297,34 +297,6 @@ public class HtmlParserExamples extends Example {
 
 	}
 
-	@Test
-	public void example009ItemFollow() {
-		HtmlEntityList entityList = new HtmlEntityList();
-		HtmlParserSettings settings = new HtmlParserSettings(entityList);
-
-		HtmlEntitySettings items = entityList.configureEntity("items");
-
-		PartialHtmlPath path = items.newPath().match("table").id("productsTable").match("td").match("div").classes("productContainer");
-
-		path.addField("name").match("span").classes("prodName", "prodNameTro").getText();
-		path.addField("price").match("span").classes("prodPrice").getText();
-
-		settings.configurePaginator().newGroup().startAt("div").classes("filterDropdowns").endAt("div").classes("serpSearchString").setNextPage().match("div").id("pagination").match("a").precededImmediatelyBy("a").classes("active").getAttribute("href");
-		settings.configurePaginator().setFollowCount(1);
-
-		HtmlLinkFollower linkFollower = settings.configureLinkFollower();
-		linkFollower.addLink().match("table").id("productsTable").match("td").match("div").classes("productContainer").match("div").classes("parentContainer").match("a").getAttribute("href");
-		linkFollower.addField("fullDesc").match("div").id("salesArg").match("a").getPrecedingText();
-		linkFollower.addField("goodToKnow").match("div").id("careInst").getText();
-
-		HtmlParser parser = new HtmlParser(settings);
-
-		printOutput(parser.parseAll(new FileProvider("inputs/page1.html", "UTF-8")));
-
-		printAndValidate();
-	}
-
-
 	protected HtmlEntityList configure() {
 		HtmlEntityList entityList = new HtmlEntityList();
 
