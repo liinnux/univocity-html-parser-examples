@@ -254,7 +254,7 @@ public class HtmlParserExamples extends Example {
 		settings.setFileNamePattern("search/page_{pageNumber}");
 
 		//Pagination allows the parser to go to the next page after parsing a page
-		HtmlPaginator paginator = settings.configurePaginator();
+		HtmlPaginator paginator = settings.getPaginator();
 		paginator.newGroup().startAt("div").classes("filterDropdowns").endAt("div").classes("serpSearchString").setNextPage().match("div").id("pagination").match("a").precededImmediatelyBy("a").classes("active").getAttribute("href");
 
 
@@ -281,7 +281,7 @@ public class HtmlParserExamples extends Example {
 		settings.setFileNamePattern("search/page_{pageNumber}");
 
 		//Pagination allows the parser to go to the next page after parsing a page
-		HtmlPaginator paginator = settings.configurePaginator();
+		HtmlPaginator paginator = settings.getPaginator();
 		paginator.newGroup().startAt("div").classes("filterDropdowns").endAt("div").classes("serpSearchString").setNextPage().match("div").id("pagination").match("a").precededImmediatelyBy("a").classes("active").getAttribute("href");
 
 		HtmlParser parser = new HtmlParser(settings);
