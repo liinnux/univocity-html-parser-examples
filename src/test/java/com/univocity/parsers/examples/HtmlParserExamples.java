@@ -301,7 +301,7 @@ public class HtmlParserExamples extends Example {
 		HtmlEntityList entityList = new HtmlEntityList();
 
 		HtmlEntitySettings items = entityList.configureEntity("items");
-		PartialHtmlPath path = items.newPath().match("table").id("productsTable").match("td").match("div").classes("productContainer");
+		PartialPath path = items.newPath().match("table").id("productsTable").match("td").match("div").classes("productContainer");
 		path.addField("name").match("span").classes("prodName", "prodNameTro").getText();
 		path.addField("URL").match("a").childOf("div").classes("productPadding").getAttribute("href");
 		path.addField("desc").match("span").classes("prodDesc").getText();
