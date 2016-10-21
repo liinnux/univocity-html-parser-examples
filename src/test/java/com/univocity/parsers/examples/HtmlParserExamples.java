@@ -251,7 +251,7 @@ public class HtmlParserExamples extends Example {
 		HtmlParserSettings settings = new HtmlParserSettings(entityList);
 		//Sets where content will be downloaded to and sets a filename pattern for pages downloaded
 		settings.setDownloadContentDirectory("{user.home}/Downloads/ikea/");
-		settings.setFileNamePattern("search/page_{pageNumber}");
+		settings.setFileNamePattern("search/page_{number}");
 
 		//Pagination allows the parser to go to the next page after parsing a page
 		HtmlPaginator paginator = settings.getPaginator();
@@ -278,7 +278,7 @@ public class HtmlParserExamples extends Example {
 		HtmlParserSettings settings = new HtmlParserSettings(entityList);
 		//Sets where content will be downloaded to and sets a filename pattern for pages downloaded
 		settings.setDownloadContentDirectory("{user.home}/Downloads/ikea/");
-		settings.setFileNamePattern("search/page_{pageNumber}");
+		settings.setFileNamePattern("search/page_{number}");
 
 		//Pagination allows the parser to go to the next page after parsing a page
 		HtmlPaginator paginator = settings.getPaginator();
