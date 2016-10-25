@@ -6,10 +6,11 @@
 
 package com.univocity.parsers.examples;
 
-import com.univocity.api.common.*;
 import com.univocity.api.entity.html.*;
 import com.univocity.api.entity.html.builders.*;
 import com.univocity.api.entity.html.processor.*;
+import com.univocity.api.io.*;
+import com.univocity.api.net.*;
 import com.univocity.parsers.common.processor.core.*;
 import com.univocity.parsers.common.record.*;
 import com.univocity.parsers.conversions.*;
