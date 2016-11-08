@@ -307,7 +307,7 @@ public class HtmlParserExamples extends Example {
 		path.addField("URL").match("a").childOf("div").classes("productPadding").getAttribute("href");
 		path.addField("desc").match("span").classes("prodDesc").getText();
 		path.addField("price").match("span").classes("prodPrice").getText();
-		path.addField("image").match("img").classes("prodImg").getContentFrom("src");
+		path.addField("image").match("img").classes("prodImg").getAttribute("src").download();
 
 		return entityList;
 	}
