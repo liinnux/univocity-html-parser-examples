@@ -298,6 +298,29 @@ public class HtmlParserExamples extends Example {
 
 	}
 
+//	@Test
+//	public void queryTest() {
+//		HtmlParserSettings settings = new HtmlParserSettings(configure());
+//		final HtmlElement[] rootElement = {null};
+//		settings.getEntityList().getEntity("items").setListener(new HtmlParserListener() {
+//			@Override
+//			public void elementVisited(HtmlElement element, HtmlParsingContext context) {
+//				if (rootElement[0] == null) {
+//					rootElement[0] = element;
+//				}
+//			}
+//
+//			@Override
+//			public void parsingEnded(HtmlParsingContext context) {
+//				System.out.println(rootElement[0].query("span[class=padding]"));
+//			}
+//		});
+//		UrlReaderProvider input = new UrlReaderProvider("http://www.ikea.com/au/en/search/?query=cup");
+//		HtmlParser parser = new HtmlParser(settings);
+//		parser.parseAll(input);
+//
+//	}
+
 	protected HtmlEntityList configure() {
 		HtmlEntityList entityList = new HtmlEntityList();
 
